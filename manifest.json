@@ -2,7 +2,7 @@
   "name": "Calculator",
   "short_name": "calc",
   "description": "الة حاسبة عملية وسريعه",
-  "start_url": "https://alphaproject-self.vercel.app/",
+  "start_url": "https://m7d-calculator.vercel.app",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#007bff",
