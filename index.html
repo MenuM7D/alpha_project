@@ -9,6 +9,7 @@
     <meta name="theme-color" content="#007bff">
 </head>
 <body>
+
 <div class="calculator">
     <div class="display-section">
         <input type="text" id="display" placeholder="أدخل العملية الحسابية" readonly>
@@ -47,9 +48,36 @@
     </div>
 </div>
 
+<!-- زر مخصص لعرض التثبيت -->
+<button id="installButton" style="display: none;">تثبيت التطبيق</button>
+
 <script src="script.js"></script>
 
 <script>
+    let deferredPrompt;
+
+    // مراقبة حدث "قبل التثبيت"
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById('installButton').style.display = 'block';
+    });
+
+    // التعامل مع زر التثبيت
+    document.getElementById('installButton').addEventListener('click', () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('تم قبول التثبيت');
+                } else {
+                    console.log('تم رفض التثبيت');
+                }
+                deferredPrompt = null;
+            });
+        }
+    });
+
     // تسجيل Service Worker
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
