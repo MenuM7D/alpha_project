@@ -1,0 +1,21 @@
+{
+  "name": "Calculator",
+  "short_name": "calc",
+  "description": "الة حاسبة عملية وسريعه",
+  "start_url": "https://alphaproject-self.vercel.app/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
