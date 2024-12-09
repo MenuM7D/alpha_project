@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M7D Calculator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
@@ -15,76 +15,17 @@
         <input type="text" id="display" placeholder="أدخل العملية الحسابية" readonly>
         <div id="result" class="result">0</div>
     </div>
-
     <div class="keyboard-section">
-        <button onclick="clearAll()">مسح الكل</button>
-        <button onclick="clearDisplay()">C</button>
-        <button onclick="deleteLast()">⌫</button>
-        <button onclick="appendOperator('÷')">÷</button>
-
-        <button onclick="appendOperator('^')">^</button>
-        <button onclick="appendFunction('Math.sqrt(')">√</button>
-        <button onclick="appendFunction('Math.PI')">π</button>
-        <button onclick="appendOperator('%')">%</button>
-
-        <button onclick="appendNumber('7')">7</button>
-        <button onclick="appendNumber('8')">8</button>
-        <button onclick="appendNumber('9')">9</button>
-        <button onclick="appendOperator('×')">×</button>
-
-        <button onclick="appendNumber('4')">4</button>
-        <button onclick="appendNumber('5')">5</button>
-        <button onclick="appendNumber('6')">6</button>
-        <button onclick="appendOperator('−')">−</button>
-
-        <button onclick="appendNumber('1')">1</button>
-        <button onclick="appendNumber('2')">2</button>
-        <button onclick="appendNumber('3')">3</button>
-        <button onclick="appendOperator('+')">+</button>
-
-        <button onclick="appendNumber('0')">0</button>
-        <button onclick="appendNumber('.')">.</button>
-        <button onclick="handleEqual()">=</button>
+        <!-- الأزرار هنا -->
     </div>
 </div>
 
-<!-- زر مخصص لعرض التثبيت -->
-<button id="installButton" style="display: none;">تثبيت التطبيق</button>
-
-<script src="script.js"></script>
-
 <script>
-    let deferredPrompt;
-
-    // مراقبة حدث "قبل التثبيت"
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        document.getElementById('installButton').style.display = 'block';
-    });
-
-    // التعامل مع زر التثبيت
-    document.getElementById('installButton').addEventListener('click', () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('تم قبول التثبيت');
-                } else {
-                    console.log('تم رفض التثبيت');
-                }
-                deferredPrompt = null;
-            });
-        }
-    });
-
     // تسجيل Service Worker
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(() => console.log('Service Worker مسجل بنجاح'))
-                .catch(err => console.error('فشل التسجيل:', err));
-        });
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(() => console.log('Service Worker مسجل'))
+            .catch((err) => console.error('فشل التسجيل:', err));
     }
 </script>
 
